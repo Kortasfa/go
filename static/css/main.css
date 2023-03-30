@@ -153,7 +153,7 @@
     padding-right: 12.5%;
 }
 
-.featured_flex
+.featured__posts
 {
     display: flex;
     justify-content: space-around;
@@ -174,7 +174,7 @@
     background-size: 100%;
 }
 
-.post_text-decoration
+.post__link 
 {
     text-decoration: none;
 }
@@ -235,7 +235,7 @@
     background-size: 100%;
 }
 
-.button__adventure
+.post__button
 {
     position: absolute;
     margin-top: 20px;
@@ -261,33 +261,33 @@
 .most-recent__post
 {
     background: #FCFCFC;
-    width: 370px; //
-    height: 350px; //
+    width: 370px; 
+    height: 350px; 
     margin-top: 40px;
     margin-bottom: 20px;
 }
 
-.rpost__img
+.recent-post__img
 {
     background: #D6D6D6;;
 }
 
-.rpost__heading-text 
+.recent-post__heading-text 
 {
     background-color: #FFF;
-    height: 100px; //
+    height: 100px;
     padding-top: 10px;
     padding-left: 20px;
 }
 
-.rpost__heading
+.recent-post__heading
 {
     font: 19px 'Lora';
     color: #101315; 
     margin-bottom: 10px;
 }
 
-.rpost__text
+.recent-post__text
 {
     font: 15px 'Oxygen';
     line-height: 24px;
@@ -295,7 +295,7 @@
     margin-right: 40px;
 }
 
-.rpost__footer
+.recent-post__footer
 {
     display: flex;
     flex-direction: row;
@@ -304,23 +304,13 @@
     padding-right: 20px;
 }
 
-.rpost__line
+.recent-post__line
 {
     height: 1px;
     background: #EFEFEF;
 }
 
-/*.rpost__footer::before //
-{
-    content: " ";
-    display: block;
-    height: 1px;
-    width: 100%;
-    background: #EFEFEF;
-    margin-bottom: 12px;
-}*/
-
-.rpost__author-span
+.recent-post__author-span
 {
     display: flex;
     flex-direction: row;
@@ -328,7 +318,7 @@
     align-items: center;   
 }
 
-.rpost__author
+.recent-post__author
 {
     margin-right: 10px;
     margin-top: 12px;
@@ -337,7 +327,7 @@
     border-radius: 60px;
 }
 
-.rpost__span
+.recent-post__span
 {
     font: 13px 'Oxygen';
     color: #999999;
@@ -407,7 +397,7 @@
     padding: 31px 0px;
 }
 
-.basement__nav__nav__link
+.nav__nav-link
 {
     font: 11px/2.36 'Oxygen';
     letter-spacing: 1px;
@@ -439,7 +429,7 @@
 
 .description_height
 {
-    height: 300px;
+    height: 100px;
 }
 
 

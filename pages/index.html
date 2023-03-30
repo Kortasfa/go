@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Escape.</title>
-  <link href="css/main.css" rel="stylesheet">
+  <link href="/static/css/main.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -38,135 +38,60 @@
   <div class="main">
     <div class="featured">
       <h2 class="featured__heading main__heading">Featured Posts</h2>
-      <div class="featured_flex">
-        <article class="featured__post featured__post_background-road post">
-          <a class="post post__heading" href="the-road-ahead.html"><h2 class="post_text-decoration post__heading">The road ahead</h2></a>
-          <a class="post post_text-decoration" href="the-road-ahead.html">
-            <p class="post post__text">The road ahead might be paved - it might not be.</p>
-          </a>
-          <div class="post__footer post footer">
-            <div class="footer footer__author">
-              <img class="post__image" src="images/mat_vogels.jpg" alt="William Wong">
-              <span class="post__image-author">Mat Vogels</span>
-            </div>
-            <span class="post__image-date">September 25, 2015</span>
-        </article>
-        <article class="featured__post featured__post_background-fromtop">
-          <button class="button button__adventure">ADVENTURE</button>
-          <h2 class="post__heading">From Top Down</h2>
-          <p class="post__text">Once a year, go someplace you’ve never been before.</p>
-          <div class="post__footer post footer">
+      <div class="featured__posts">
+        {{ range .FeaturedPosts }}
+        <article class="featured__post {{ .BackgroundImageModifier }} post">
+          <span class="button {{ .ButtonClass }}">{{ .PostButton }}</span>
+          <h2 class="post__heading">{{ .Title }}</h2>
+          <p class="post__text">{{ .Subtitle }}</p>
+          <div class="post__footer footer">
             <div class="footer__author">
-              <img class="post__image" src="images/william_wong.jpg" alt="William Wong">
-              <span class="post__image-author">William Wong</span>
+              <img class="post__image" src="{{ .AuthorAvatar }}" alt="{{ .AuthorName }}">
+              <span class="post__image-author">{{ .AuthorName }}</span>
             </div>
-            <span class="post__image-date">September 25, 2015</span>
+            <span class="post__image-date">{{ .PublishDate }}</span>
         </article>
+        {{ end }}
       </div>
     </div>
     <div class="most-recent">
       <h2 class="most-recent__heading main__heading">Most Recent</h2>
       <section class="most-recent__posts">
-        <article class="most-recent__post rpost "> <!--Problem-->
-          <img class="rpost__img" src="images/still_standing_tall.jpg" alt="Still Standing Tall" style="width: 100%">
-          <div class="rpost__heading-text">
-            <h3 class="rpost__heading">Still Stanging Tall</h3>
-            <p class="rpost__text">Life begins at the end of your comfort zone.</p>
+        {{ range .MostRecent }}
+        <article class="most-recent__post recent-post ">
+          <img class="recent-post__img" src="{{ .PhotoImage }}" alt="{{ .Title}}" style="width: 100%">
+          <div class="recent-post__heading-text">
+            <h3 class="recent-post__heading">{{ .Title }}</h3>
+            <p class="recent-post__text">{{ .Subtitle }}</p>
           </div>
-          <div class="rpost__footer">
-            <div class="rpost__author-span">
-              <img class="rpost__author" src="images/william_wong.jpg" alt="William Wong">
-              <span class="rpost__span">William Wong</span>
+          <div class="recent-post__footer">
+            <div class="recent-post__author-span">
+              <img class="recent-post__author" src="{{ .AuthorAvatar}}" alt="William Wong">
+              <span class="recent-post__span">{{ .AuthorName }}</span>
             </div>
-            <span class="rpost__span">9/25/2015</span>
+            <span class="recent-post__span">{{ .PublishDate }}</span>
           </div>
         </article>
-        <article class="most-recent__post rpost">
-          <img class="rpost__img" src="images/sunny_side_up.jpg" alt="Sunny Side Up" style="width: 100%">
-          <div class="rpost__heading-text">
-            <h3 class="rpost__heading">Sunny Side Up</h3>
-            <p class="rpost__text">No place is ever as bad as they tell you it’s going to be.</p>
-          </div>
-          <div class="rpost__footer">
-            <div class="rpost__author-span">
-              <img class="rpost__author" src="images/mat_vogels.jpg" alt="William Wong">
-              <span class="rpost__span">Mat Vogels</span>
-            </div>
-            <span class="rpost__span">9/25/2015</span>
-          </div>
-        </article>
-        <article class="most-recent__post rpost">
-          <img class="rpost__img" src="images/water_falls.jpg" alt="Water Falls" style="width: 100%">
-          <div class="rpost__heading-text">
-            <h3 class="rpost__heading">Water Falls</h3>
-            <p class="rpost__text">We travel not to escape life, but for life not to escape us.</p>
-          </div>
-          <div class="rpost__footer">
-            <div class="rpost__author-span">
-              <img class="rpost__author" src="images/mat_vogels.jpg" alt="William Wong">
-              <span class="rpost__span">Mat Vogels</span>
-            </div>
-            <span class="rpost__span">9/25/2015</span>
-          </div>
-        </article>
-        <article class="most-recent__post rpost">
-          <img class="rpost__img" src="images/through_the_mist.jpg" alt="Through The Mist" style="width: 100%">
-          <div class="rpost__heading-text">
-            <h3 class="rpost__heading">Through The Mist</h3>
-            <p class="rpost__text">Travel makes you see what a tiny place you occupy in the world.</p>
-          </div>
-          <div class="rpost__footer">
-            <div class="rpost__author-span">
-              <img class="rpost__author" src="images/william_wong.jpg" alt="William Wong">
-              <span class="rpost__span">William Wong</span>
-            </div>
-            <span class="rpost__span">9/25/2015</span>
-          </div>
-        </article>
-        <article class="most-recent__post rpost">
-          <img class="rpost__img" src="images/awaken_early.jpg" alt="Awaken Early" style="width: 100%">
-          <div class="rpost__heading-text">
-            <h3 class="rpost__heading">Awaken Early</h3>
-            <p class="rpost__text">Not all those who wander are lost.</p>
-          </div>
-          <div class="rpost__footer">
-            <div class="rpost__author-span">
-              <img class="rpost__author" src="images/mat_vogels.jpg" alt="William Wong">
-              <span class="rpost__span">Mat Vogels</span>
-            </div>
-            <span class="rpost__span">9/25/2015</span>
-          </div>
-        </article>
-        <article class="most-recent__post rpost">
-          <img class="rpost__img" src="images/try_it_always.jpg" alt="Try It Always" style="width: 100%">
-          <div class="rpost__heading-text">
-            <h3 class="rpost__heading">Try It Always</h3>
-            <p class="rpost__text">The world is a book, and those who do not travel read only one page.</p>
-          </div>
-          <div class="rpost__footer">
-            <div class="rpost__author-span">
-              <img class="rpost__author" src="images/mat_vogels.jpg" alt="William Wong">
-              <span class="rpost__span">Mat Vogels</span>
-            </div>
-            <span class="rpost__span">9/25/2015</span>
-          </div>
-        </article>
+        {{ end }}
       </section>
+
     </div>
   </div>
-  <div class="intouch-basement"> <!--Problem-->
-    <h2 class="intouch__name">Stay in Touch</h2>
-    <form class="intouch__data data">
-      <input class="data__email" type="text" name="email" placeholder="Enter your email address">
-      <input class="data__submit" type="submit">
-    </form>
+  <div class="intouch-basement">
+    <div class="intouch">
+      <h2 class="intouch__name">Stay in Touch</h2>
+      <form class="intouch__data data">
+        <input class="data__email" type="text" name="email" placeholder="Enter your email address">
+        <input class="data__submit" type="submit">
+      </form>
+    </div>
     <footer class="basement">
       <span class="logo">Escape.</span>
-      <nav class="basement__nav"> <!--Problem-->
-        <a class="basement__nav__nav__link" href="#">HOME</a>
-        <a class="basement__nav__nav__link" href="#">CATEGORIES</a>
-        <a class="basement__nav__nav__link" href="#">ABOUT</a>
-        <a class="basement__nav__nav__link" href="#">CONTACT</a>
+      <nav class="basement__nav nav">
+        <a class="nav__nav-link" href="#">HOME</a>
+        <a class="nav__nav-link" href="#">CATEGORIES</a>
+        <a class="nav__nav-link" href="#">ABOUT</a>
+        <a class="nav__nav-link" href="#">CONTACT</a>
       </nav>
     </footer>
   </div>
