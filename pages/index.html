@@ -39,9 +39,12 @@
     <div class="featured">
       <h2 class="featured__heading main__heading">Featured Posts</h2>
       <div class="featured__posts">
-        {{ range .FeaturedPosts }}
-        <article class="featured__post post" style="background: url('{{ .ImageUrl }}') no-repeat; background-size: 100%;">
-          <h2 class="post__heading">{{ .Title }}</h2>
+        {{ range .FPosts }}
+        <article class="featured__post post"
+          style="background: url('{{ .ImageUrl }}') no-repeat; background-size: 100%;">
+          <a href="{{ .PostURL }}" style="text-decoration: none">
+            <h2 class="post__heading">{{ .Title }}</h2>
+          </a>
           <p class="post__text">{{ .Subtitle }}</p>
           <div class="post__footer footer">
             <div class="footer__author">
@@ -56,11 +59,13 @@
     <div class="most-recent">
       <h2 class="most-recent__heading main__heading">Most Recent</h2>
       <section class="most-recent__posts">
-        {{ range .RecentPosts }}
+        {{ range .RPosts }}
         <article class="most-recent__post recent-post ">
           <img class="recent-post__img" src="{{ .ImageUrl }}" alt="{{ .Title}}" style="width: 100%">
           <div class="recent-post__heading-text">
-            <h3 class="recent-post__heading">{{ .Title }}</h3>
+            <a href=" {{ .PostURL}}" style="text-decoration: none">
+              <h3 class="recent-post__heading">{{ .Title }}</h3>
+            </a>
             <p class="recent-post__text">{{ .Subtitle }}</p>
           </div>
           <div class="recent-post__footer">
