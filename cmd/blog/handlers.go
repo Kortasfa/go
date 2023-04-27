@@ -51,7 +51,7 @@ type PostData struct {
 
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// posts, err := orders(db)
+		// posts, err := posts(db)
 		fposts, err := fposts(db)
 		rposts, err := rposts(db)
 		if err != nil {
@@ -85,23 +85,23 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func order(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		orderIDStr := mux.Vars(r)["PostID"] // Получаем orderID в виде строки из параметров урла
+		postIDStr := mux.Vars(r)["PostID"] // Получаем postID в виде строки из параметров урла
 
-		orderID, err := strconv.Atoi(orderIDStr) // Конвертируем строку orderID в число
+		postID, err := strconv.Atoi(postIDStr) // Конвертируем строку postID в число
 		if err != nil {
-			http.Error(w, "Invalid order id", 403)
+			http.Error(w, "Invalid post id", 403)
 			log.Println(err)
 			return
 		}
 
-		order, err := orderByID(db, orderID)
+		post, err := postByID(db, postID)
 		if err != nil {
 			if err == sql.ErrNoRows {
 				// sql.ErrNoRows возвращается, когда в запросе к базе не было ничего найдено
 				// В таком случае мы возвращем 404 (not found) и пишем в тело, что ордер не найден
-				http.Error(w, "Order not found", 404)
+				http.Error(w, "post not found", 404)
 				log.Println(err)
 				return
 			}
@@ -118,7 +118,7 @@ func order(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = ts.Execute(w, order)
+		err = ts.Execute(w, post)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Println(err)
@@ -144,20 +144,20 @@ func fposts(db *sqlx.DB) ([]*FeaturedPosts, error) {
 			post
 		WHERE featured = 1
 	`
-	// Такое объединение строк делается только для таблицы order, т.к. это зарезерированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
+	// Такое объединение строк делается только для таблицы post, т.к. это зарезерированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
 
-	var orders []*FeaturedPosts // Заранее объявляем массив с результирующей информацией
+	var posts []*FeaturedPosts // Заранее объявляем массив с результирующей информацией
 
-	err := db.Select(&orders, query) // Делаем запрос в базу данных
+	err := db.Select(&posts, query) // Делаем запрос в базу данных
 	if err != nil {                  // Проверяем, что запрос в базу данных не завершился с ошибкой
 		return nil, err
 	}
 
-	for _, order := range orders {
-		order.PostURL = "/post/" + order.PostID // Формируем исходя из ID ордера в базе
+	for _, post := range posts {
+		post.PostURL = "/post/" + post.PostID // Формируем исходя из ID ордера в базе
 	}
 
-	return orders, nil
+	return posts, nil
 }
 
 func rposts(db *sqlx.DB) ([]*RecentPosts, error) {
@@ -175,23 +175,23 @@ func rposts(db *sqlx.DB) ([]*RecentPosts, error) {
 			post
 		WHERE featured = 0
 	`
-	// Такое объединение строк делается только для таблицы order, т.к. это зарезерированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
+	// Такое объединение строк делается только для таблицы post, т.к. это зарезерированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
 
-	var orders []*RecentPosts // Заранее объявляем массив с результирующей информацией
+	var posts []*RecentPosts // Заранее объявляем массив с результирующей информацией
 
-	err := db.Select(&orders, query) // Делаем запрос в базу данных
+	err := db.Select(&posts, query) // Делаем запрос в базу данных
 	if err != nil {                  // Проверяем, что запрос в базу данных не завершился с ошибкой
 		return nil, err
 	}
 
-	for _, order := range orders {
-		order.PostURL = "/post/" + order.PostID // Формируем исходя из ID ордера в базе
+	for _, post := range posts {
+		post.PostURL = "/post/" + post.PostID // Формируем исходя из ID ордера в базе
 	}
 
-	return orders, nil
+	return posts, nil
 }
 
-func orderByID(db *sqlx.DB, orderID int) (PostData, error) {
+func postByID(db *sqlx.DB, postID int) (PostData, error) {
 	const query = `
 		SELECT
 			title,
@@ -205,13 +205,13 @@ func orderByID(db *sqlx.DB, orderID int) (PostData, error) {
 	`
 	// В SQL-запросе добавились параметры, как в шаблоне. ? означает параметр, который мы передаем в запрос ниже
 
-	var order PostData
+	var post PostData
 
-	// Обязательно нужно передать в параметрах orderID
-	err := db.Get(&order, query, orderID)
+	// Обязательно нужно передать в параметрах postID
+	err := db.Get(&post, query, postID)
 	if err != nil {
 		return PostData{}, err
 	}
 
-	return order, nil
+	return post, nil
 }

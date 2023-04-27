@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    background-color: #F7F7F7;
+}
+
+.content {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.heading {
+    background-color: #2E2E2E;
+    background-size: cover;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.logo {
+    font: 26px 'Lora';
+    color: #FFF;
+}
+
+.logo_color {
+    color: #2E2E2E;
+}
+
+.icons {
+    display: flex;
+}
+
+.content__heading {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading__name {
+    font-family: 'Lora';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.heading__description {
+    opacity: 63%;
+    color: #2E2E2E;
+    font-family: 'Oxygen';
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.button {
+    border-radius: 3px;
+    color: #FFF;
+    background: #DD783F;
+    border: none;
+    height: 44px;
+    padding: 12px 31px;
+    font: 13px 'Oxygen';
+}
+
+.main {
+    background-color: #FFF;
+    margin-top: 20px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.main__header {
+    font-family: 'Lora';
+    font-weight: 400;
+    font-size: 25px;
+    padding-bottom: 40px;
+}
+
+.main-box {
+    background: white;
+    font-family: 'Lora';
+}
+
+.main-box__name {
+    color: #7A7A7A;
+    font-family: 'Oxygen';
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.main-box__input {
+    width: 100%;
+    padding: 15px 20px;
+    margin-top: 4px;
+    margin-bottom: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.upload-photos>input {
+    display: none;
+}
+
+.images_author-image
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 20%;
+    justify-content: space-between;
+    font-family: 'Oxygen';
+    font-weight: 400;
+    font-size: 16px;
+    color: #2E2E2E;
+}
+
+.preiew
+{
+    color: #7A7A7A;
+    font-family: 'Oxygen';
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 30px;
+}
+

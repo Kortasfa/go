@@ -29,7 +29,7 @@ func main() {
 	mux.HandleFunc("/home", index(dbx)) // Передаём клиент к базе данных в ф-ию обработчик запроса
 
 	// Указывем orderID поста в URL для перехода на конкретный пост
-	mux.HandleFunc("/post/{PostID}", order(dbx))
+	mux.HandleFunc("/post/{PostID}", post(dbx))
 
 	// Правим отдачу статического контента, в виду перезда на новый роутер
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))

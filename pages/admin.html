@@ -4,17 +4,88 @@
 <head>
   <meta charset="UTF-8">
   <title>Escape.author</title>
-  <link href="/static/css/author.css" rel="stylesheet">
+  <link href="/static/css/admin.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="/static/admin.js"></script>
 </head>
 
-<body class="body__image">
-  <div class="logo">
-    <h1>
-      Escape.author
-    </h1>
-  </div>
-  
+<body class="body">
+  <header class="heading">
+    <span class="logo">Escape.author</span>
+    <nav class="icons">
+      <img src="../static/images/Avatar.svg">
+      <img src="../static/images/exit.svg">
+    </nav>
+  </header>
+  <section class="content">
+    <div class="content__heading">
+      <div>
+        <h2 class="heading__name">New Post</h2>
+        <p class="heading__description">Fill out the form bellow and publish your article</p>
+      </div>
+      <button class="button">Publish</button>
+    </div>
+
+    <main class="main">
+      <h3 class="main__header">Main Information</h3>
+      <div style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap;">
+        <section class="main-box">
+          <form action="" class="form">
+            <label for="title" class="main-box__name">Title</label><br />
+            <input type="text" name="title" class="main-box__input"><br />
+            <label for="description" class="main-box__name">Short description</label><br />
+            <input type="text" name="description" class="main-box__input"><br />
+            <label for="author_name" class="main-box__name">Author name</label><br />
+            <input type="text" name="description" class="main-box__input"><br />
+            <div class="upload-photos">
+              <label for="file-input" class="main-box__name">Author Photo<br />
+                <div class="images_author-image" id="preview">
+                  <img src="../static/images/upload_author-image.svg">
+                  <p>Upload</p>
+                </div>
+              </label>
+              <input type="file" name="author_image" class="main-box__input_author-image"><br />
+            </div>
+            <label for="publish_date" class="main-box__name">Publish Date</label><br />
+            <input type="date" name="publish_date" class="main-box__input"><br />
+            <div class="upload-photos">
+              <label for="file-input" class="main-box__name">Hero Image<br />
+                <div class="images">
+                  <img src="../static/images/upload_hero-image.svg">
+                  <p>Size up to 10mb. Format: png, jpeg, gif.</p>
+                </div>
+              </label>
+              <input type="file" id="file-input" name="hero_image" class="main-box__input_author-image"><br />
+            </div><br />
+            <div class="upload-photos">
+              <label for="file-input" class="main-box__name">Hero Image<br />
+                <div class="images">
+                  <img src="../static/images/upload_hero-image-2.svg">
+                  <p>Size up to 5mb. Format: png, jpeg, gif.</p>
+                </div>
+              </label>
+              <input type="file" id="file-input" name="hero_image" class="main-box__input_author-image"><br />
+            </div>
+          </form>
+        </section>
+        <section class="preiews">
+          <div class="preiew">
+            <p>Article preview</p><br />
+            <img src="../static/images/page preview.svg">
+          </div>
+          <div class="preiew">
+            <p>Post card preview</p><br />
+            <img src="../static/images/card-preview.svg">
+          </div>
+        </section>
+      </div>
+    </main>
+    <div style="margin-top: 20px; background-color: white;" class="main">
+      <h3 class="main__header">Content</h3>
+      <label for="title" class="main-box__name">Post content (plain text)</label><br />
+      <textarea type="text" name="title" class="main-box__input" rows="5" cols="80"></textarea><br />
+    </div>
+  </section>
 </body>
