@@ -21,46 +21,59 @@
     height: 100vh;
 }
 
+.slogan {
+    font-family: "Oxygen";
+    font-size: 17px;
+}
+
 .registration-box {
-    height: 80vh;
+    height: 70vh;
     width: 30vw;
     background: white;
     font-family: 'Lora';
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 40px;
 }
 
-input[type=text],
-select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+textarea:focus, input:focus{
+    outline: none;
+    background-color: #F7F7F7;
 }
 
-input[type=password], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
+
+input {
+    width: 95%;
+    padding: 12px 0px 15px 10px;
+    margin: 8px 0px;
+    margin-bottom: 50px;
+    border: 0px;
+    border-bottom: solid #EAEAEA 1px;
+    font-size: 16px;
+}
+
 
 input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
+    width: 25%;
+    background-color: #DD783F;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
+.title {
+    font: 400 34px 'Lora';
+    margin-bottom: 10px;
+}
+
+.form-style {
+    color: #7A7A7A;
+    font: 400 12px 'Oxygen';
+}
+

@@ -8,84 +8,165 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <script src="/static/admin.js"></script>
 </head>
 
 <body class="body">
   <header class="heading">
-    <span class="logo">Escape.author</span>
-    <nav class="icons">
-      <img src="../static/images/Avatar.svg">
-      <img src="../static/images/exit.svg">
+    <div class="heading__logo logo">
+      <p class="logo__title">Escape.</p>
+      <p class="logo__subtitle">author</p>
+    </div>
+
+    <nav class="heading__nav icons">
+      <img src="../static/images/Avatar.svg" alt="Avatar">
+      <img src="../static/images/exit.svg" alt="Exit">
     </nav>
   </header>
+
   <section class="content">
     <div class="content__heading">
       <div>
-        <h2 class="heading__name">New Post</h2>
-        <p class="heading__description">Fill out the form bellow and publish your article</p>
+        <h2 class="content__heading-name">New Post</h2>
+        <p class="content__heading-description">Fill out the form bellow and publish your article</p>
       </div>
-      <button class="button">Publish</button>
+      <input type="submit" form="myform" class="content__heading-button button" value="Publish" />
+    </div>
+
+    <div class="warning-button_wrong">
+      <div class="warning-button">
+        <img src="../static/images/alert-circle.svg">
+        <p>Whoops! Some fields need your attention :o</p>
+      </div>
+    </div>
+
+    <div class="warning-button_good">
+      <div class="warning-button">
+        <img src="../static/images/check-circle.svg">
+        <p>Publish Complete!</p>
+      </div>
     </div>
 
     <main class="main">
       <h3 class="main__header">Main Information</h3>
-      <div style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap;">
+      <div class="main__content">
         <section class="main-box">
-          <form action="" class="form">
-            <label for="title" class="main-box__name">Title</label><br />
-            <input type="text" name="title" class="main-box__input"><br />
-            <label for="description" class="main-box__name">Short description</label><br />
-            <input type="text" name="description" class="main-box__input"><br />
-            <label for="author_name" class="main-box__name">Author name</label><br />
-            <input type="text" name="description" class="main-box__input"><br />
-            <div class="upload-photos">
-              <label for="file-input" class="main-box__name">Author Photo<br />
-                <div class="images_author-image" id="preview">
-                  <img src="../static/images/upload_author-image.svg">
-                  <p>Upload</p>
+          <form action="" class="main-box__form" id="myform" onsubmit="return validateForm(event)">
+            <label for="title" class="main-box__label">Title</label><br />
+            <input type="text" name="title" class="main-box__input main-box__input_form" id="PostName" required ><br />
+            <label for="description" class="main-box__label">Short description</label><br />
+            <input type="text" name="description" class="main-box__input main-box__input_form" required
+              id="PostDescription"><br />
+            <label for="author_name" class="main-box__label">Author name</label><br />
+            <input type="text" name="author_name" class="main-box__input main-box__input_form" id="PostAuthor"
+              required><br />
+            <div class="main-box__upload-photos">
+              <input type="file" name="author_image" id="author-input" required><br />
+              <label for="author-input" class="main-box__label">Author Photo<br />
+                <div class="main-box__images images__author-image" id="author__menu-buttons">
+                  <img src="" id="author-preview" height="50" width="50" style="border-radius: 25px;"
+                    onerror="this.onerror=null; this.src='../static/images/upload_author-image.svg'">
+                  <p style="margin-left: 15px;" id="upload-button">Upload</p>
                 </div>
               </label>
-              <input type="file" name="author_image" class="main-box__input_author-image"><br />
             </div>
-            <label for="publish_date" class="main-box__name">Publish Date</label><br />
-            <input type="date" name="publish_date" class="main-box__input"><br />
-            <div class="upload-photos">
-              <label for="file-input" class="main-box__name">Hero Image<br />
-                <div class="images">
-                  <img src="../static/images/upload_hero-image.svg">
-                  <p>Size up to 10mb. Format: png, jpeg, gif.</p>
+            <label for="publish-date" class="main-box__label">Publish Date</label>
+            <input type="date" name="publish-date" class="main-box__input main-box__input_form" id="PostDate" required>
+            <div class="main-box__upload-photos">
+              <input type="file" id="hero-input" name="hero_image" required><br />
+              <label for="hero-input" class="main-box__label">
+                <span>Hero Image</span>
+                <div class="main-box__images" id="hero1__menu-buttons">
+                  <img src="" id="hero-preview" height="180" width="600"
+                    onerror="this.onerror=null; this.src='../static/images/upload_hero-image.svg'">
+                  <p id="first-hero">Size up to 10mb. Format: png, jpeg, gif.</p>
                 </div>
               </label>
-              <input type="file" id="file-input" name="hero_image" class="main-box__input_author-image"><br />
-            </div><br />
-            <div class="upload-photos">
-              <label for="file-input" class="main-box__name">Hero Image<br />
-                <div class="images">
-                  <img src="../static/images/upload_hero-image-2.svg">
-                  <p>Size up to 5mb. Format: png, jpeg, gif.</p>
+            </div>
+            <div class="main-box__upload-photos">
+              <input type="file" id="hero-input2" name="hero_image" required><br />
+              <label for="hero-input2" class="main-box__label">
+                <span>Hero Image</span>
+                <div class="main-box__images" id="hero2__menu-buttons">
+                  <img src="" id="hero-preview2" height="180" width="350"
+                    onerror="this.onerror=null; this.src='../static/images/upload_hero-image-2.svg'">
+                  <p id="second-hero">Size up to 5mb. Format: png, jpeg, gif.</p>
                 </div>
               </label>
-              <input type="file" id="file-input" name="hero_image" class="main-box__input_author-image"><br />
             </div>
           </form>
         </section>
-        <section class="preiews">
-          <div class="preiew">
-            <p>Article preview</p><br />
-            <img src="../static/images/page preview.svg">
+
+        <section class="previews">
+          <div class="preview">
+            <span class="preview__title">Article preview</span>
+            <div class="preview__border preview__border--first">
+              <div class="preview__border--second">
+                <div class="preview__border--third-top">
+                  <div class="preview__image-button"></div>
+                  <div class="preview__image-button"></div>
+                  <div class="preview__image-button"></div>
+                </div>
+                <div class="preview__border--third-bottom">
+                  <h3 class="preview__post-name PreviewPostName">New Post</h3>
+                  <p class="preview__post-description description__length PreviewPostDescription description__lenght">
+                    Please enter any description</p>
+                  <img class="preview__border--content__image" id="article-preview" style="width: 100%;" src=""
+                    onerror="this.onerror=null; this.src='../static/images/default.svg'">
+                </div>
+              </div>
+              <div class="preview__border-shades preview__border-shades--top"></div>
+              <div class="preview__border-shades preview__border-shades--bottom"></div>
+            </div>
           </div>
-          <div class="preiew">
-            <p>Post card preview</p><br />
-            <img src="../static/images/card-preview.svg">
+          <div class="preview">
+            <span class="preview__title">Post card preview</span>
+            <div class="preview__border preview__border--card">
+              <article class="preview__post">
+                <img class="preview__post-img" id="card-preview" style="width: 100%" src=""
+                  onerror="this.onerror=null; this.src='../static/images/default.svg'">
+                <div class="preview__post-heading-text">
+                  <h3 class="preview__post-heading PreviewPostName">New Post</h3>
+                  <p class="preview__post-text PreviewPostDescription">Please, enter any description</p>
+                </div>
+                <div class="preview__post-footer">
+                  <div class="preview__post-author-span">
+                    <img class="preview__post-author" id="card-author-preview" src=""
+                      onerror="this.onerror=null; this.src='../static/images/default.svg'"></img>
+                    <span class="preview__post-span PreviewPostAuthor">Enter author name</span>
+                  </div>
+                  <span class="preview__post-span PreviewPostDate">12/23/3</span>
+                </div>
+              </article>
+              <div class="preview__border-shades preview__border-shades--bottom"></div>
+            </div>
           </div>
         </section>
       </div>
     </main>
-    <div style="margin-top: 20px; background-color: white;" class="main">
-      <h3 class="main__header">Content</h3>
-      <label for="title" class="main-box__name">Post content (plain text)</label><br />
+
+    <div class="main main__post-footer">
+      <h3 class="post-footer__header main__header">Content</h3>
+      <label for="title" class="main-box__label">Post content (plain text)</label><br />
       <textarea type="text" name="title" class="main-box__input" rows="5" cols="80"></textarea><br />
     </div>
+
+    <template id="menu-buttons" style="display: none;">
+      <div style="display: flex; align-items: center;  flex-direction: row; gap: 10px;">
+        <div style="display:flex; align-items: center; gap: 5px;">
+          <img src="../static/images/camera.svg">
+          <span style="color: #000000;">Upload New</span>
+        </div>
+        <label class="label-disable">
+          <div onclick="deleteFile(this)" style="display: flex; align-items: center; gap: 5px;" class="label-disable">
+            <img class="label-disable" src="../static/images/trask_can.svg">
+            <span class="label-disable" style="color: #E86961;">Remove</span>
+          </div>
+        </label>
+      </div>
+    </template>
+
+    <section class="scripts">
+      <script src="/static/admin.js" class="scripts__admin"></script>
+    </section>
   </section>
 </body>
