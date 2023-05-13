@@ -24,22 +24,22 @@ func main() {
 
 	dbx := sqlx.NewDb(db, dbDriverName) // Расширяем стандартный клиент к базе
 
-	// Обязательно подключить github.com/gorilla/mux в импортах
-	mux := mux.NewRouter()
-	mux.HandleFunc("/home", index(dbx)) // Передаём клиент к базе данных в ф-ию обработчик запроса
+	// Обязательно подключить github.com/gorilla/router в импортах
+	router := mux.NewRouter()
+	router.HandleFunc("/home", index(dbx)) // Передаём клиент к базе данных в ф-ию обработчик запроса
 
-	mux.HandleFunc("/admin", admin()) // Страничка админа, бд не нужно
+	router.HandleFunc("/admin", admin()) // Страничка админа, бд не нужно
 
-	mux.HandleFunc("/admin", createPost(dbx)).Methods(http.MethodPost)
+	router.HandleFunc("/admin", createPost(dbx)).Methods(http.MethodPost)
 
-	// Указывем orderID поста в URL для перехода на конкретный пост
-	mux.HandleFunc("/post/{PostID}", post(dbx))
+	// Указываем orderID поста в URL для перехода на конкретный пост
+	router.HandleFunc("/post/{PostID}", post(dbx))
 
-	// Правим отдачу статического контента, в виду перезда на новый роутер
-	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	// Правим отдачу статического контента, ввиду переезда на новый роутер
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	fmt.Println("Start server")
-	err = http.ListenAndServe(port, mux)
+	err = http.ListenAndServe(port, router)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,4 +49,3 @@ func openDB() (*sql.DB, error) {
 	// Здесь прописываем соединение к базе данных
 	return sql.Open(dbDriverName, "root:root123321@tcp(localhost:3306)/blog?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true")
 }
-
