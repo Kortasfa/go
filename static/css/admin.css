@@ -80,7 +80,7 @@
 
 .main-box {
     background: white;
-    font: 'Lora';
+    font-family: 'Lora', serif;
     padding-bottom: 30px;
 }
 
@@ -103,7 +103,7 @@
 .main-box__input_form {
     background: #F7F7F7;
     border-bottom: 1px solid #2E2E2E;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0 0;
 }
 
 .main-box__upload-photos {
@@ -133,8 +133,8 @@
     width: 440px;
     height: 385px;
     border: 1px solid #D3D3D3;
-    border-right: 0px;
-    border-bottom: 0px;
+    border-right: 0;
+    border-bottom: 0;
     border-radius: 30px 30px 0 0;
     margin-top: 10px;
     display: block;
@@ -146,8 +146,8 @@
     background: #FFFFFF;
     border: 1px solid #EAEAEA;
     border-radius: 8px;
-    border-right: 0px;
-    border-bottom: 0px;
+    border-right: 0;
+    border-bottom: 0;
 }
 
 .preview__border--third-top,
@@ -161,7 +161,6 @@
     height: 23px;
     border-bottom: 1px solid #EAEAEA;
     display: flex;
-    align-content: row;
 }
 
 .preview__border--content__image {
@@ -259,10 +258,7 @@
 .preview__post-author {
     width: 25px;
     height: 25px;
-    margin-right: 10px;
-    margin-top: 12px;
-    margin-bottom: 10px;
-    margin-left: 13px;
+    margin: 12px 10px 10px 13px;
     border-radius: 60px;
     background-color: #F7F7F7;
 }
@@ -272,7 +268,7 @@
     color: #999999;
 }
 
-.description__lenght {
+.description__length {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -290,7 +286,7 @@
     gap: 5px;
     padding-left: 8px;
     height: 40px;
-    font-family: 'Oxygen';
+    font-family: 'Oxygen', serif;
     font-size: 14px;
     border-radius: 5px;
 

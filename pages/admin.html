@@ -29,19 +29,19 @@
         <h2 class="content__heading-name">New Post</h2>
         <p class="content__heading-description">Fill out the form bellow and publish your article</p>
       </div>
-      <input type="submit" form="myform" class="content__heading-button button" value="Publish" />
+      <input type="submit" form="form" class="content__heading-button button" value="Publish" />
     </div>
 
     <div class="warning-button_wrong">
       <div class="warning-button">
-        <img src="../static/images/alert-circle.svg">
+        <img src="../static/images/alert-circle.svg" alt="warning">
         <p>Whoops! Some fields need your attention :o</p>
       </div>
     </div>
 
     <div class="warning-button_good">
       <div class="warning-button">
-        <img src="../static/images/check-circle.svg">
+        <img src="../static/images/check-circle.svg" alt="warning">
         <p>Publish Complete!</p>
       </div>
     </div>
@@ -50,13 +50,13 @@
       <h3 class="main__header">Main Information</h3>
       <div class="main__content">
         <section class="main-box">
-          <form action="" class="main-box__form" id="myform" onsubmit="return validateForm(event)" name="post">
-            <label for="title" class="main-box__label">Title</label><br />
+          <form action="" class="main-box__form" id="form" onsubmit="return validateForm()" name="post">
+            <label class="main-box__label" for="PostName">Title</label><br />
             <input type="text" name="title" class="main-box__input main-box__input_form" id="PostName" required ><br />
-            <label for="description" class="main-box__label">Short description</label><br />
+            <label class="main-box__label" for="PostDescription">Short description</label><br />
             <input type="text" name="description" class="main-box__input main-box__input_form" required
               id="PostDescription"><br />
-            <label for="author_name" class="main-box__label">Author name</label><br />
+            <label class="main-box__label" for="PostAuthor">Author name</label><br />
             <input type="text" name="author_name" class="main-box__input main-box__input_form" id="PostAuthor"
               required><br />
             <div class="main-box__upload-photos">
@@ -64,12 +64,12 @@
               <label for="authorInput" class="main-box__label">Author Photo<br />
                 <div class="main-box__images images__author-image" id="author__menu-buttons">
                   <img src="" id="authorPreview" height="50" width="50" style="border-radius: 25px;"
-                    onerror="this.onerror=null; this.src='../static/images/upload_author-image.svg'">
+                    onerror="this.onerror=null; this.src='../static/images/upload_author-image.svg'" alt="author image preview">
                   <p style="margin-left: 15px;" id="uploadButton">Upload</p>
                 </div>
               </label>
             </div>
-            <label for="publish-date" class="main-box__label">Publish Date</label>
+            <label class="main-box__label" for="PostDate">Publish Date</label>
             <input type="date" name="publish-date" class="main-box__input main-box__input_form" id="PostDate" required>
             <div class="main-box__upload-photos">
               <input type="file" id="firstHeroInput" name="hero_image" required><br />
@@ -77,7 +77,7 @@
                 <span>Hero Image</span>
                 <div class="main-box__images" id="hero1__menu-buttons">
                   <img src="" id="firstHeroPreview" height="180" width="600"
-                    onerror="this.onerror=null; this.src='../static/images/upload_hero-image.svg'">
+                    onerror="this.onerror=null; this.src='../static/images/upload_hero-image.svg'" alt="hero image preview">
                   <p id="firstHero">Size up to 10mb. Format: png, jpeg, gif.</p>
                 </div>
               </label>
@@ -88,7 +88,7 @@
                 <span>Hero Image</span>
                 <div class="main-box__images" id="hero2__menu-buttons">
                   <img src="" id="secondHeroPreview" height="180" width="350"
-                    onerror="this.onerror=null; this.src='../static/images/upload_hero-image-2.svg'">
+                    onerror="this.onerror=null; this.src='../static/images/upload_hero-image-2.svg'" alt="hero preview image">
                   <p id="secondHero">Size up to 5mb. Format: png, jpeg, gif.</p>
                 </div>
               </label>
@@ -108,10 +108,10 @@
                 </div>
                 <div class="preview__border--third-bottom">
                   <h3 class="preview__post-name preview__h3">New Post</h3>
-                  <p class="preview__post-description description__length preview__description description__lenght">
+                  <p class="preview__post-description description__length preview__description description__length">
                     Please enter any description</p>
                   <img class="preview__border--content__image" id="articlePreview" style="width: 100%;" src=""
-                    onerror="this.onerror=null; this.src='../static/images/default.svg'">
+                    onerror="this.onerror=null; this.src='../static/images/default.svg'" alt="preview post article">
                 </div>
               </div>
               <div class="preview__border-shades preview__border-shades--top"></div>
@@ -123,7 +123,7 @@
             <div class="preview__border preview__border--card">
               <article class="preview__post">
                 <img class="preview__post-img" id="cardPreview" style="width: 100%" src=""
-                  onerror="this.onerror=null; this.src='../static/images/default.svg'">
+                  onerror="this.onerror=null; this.src='../static/images/default.svg'" alt="preview post card">
                 <div class="preview__post-heading-text">
                   <h3 class="preview__post-heading preview__h3">New Post</h3>
                   <p class="preview__post-text preview__description">Please, enter any description</p>
@@ -131,7 +131,7 @@
                 <div class="preview__post-footer">
                   <div class="preview__post-author-span">
                     <img class="preview__post-author" id="cardAuthorPreview" src=""
-                      onerror="this.onerror=null; this.src='../static/images/default.svg'"></img>
+                      onerror="this.onerror=null; this.src='../static/images/default.svg'" alt="preview post author">
                     <span class="preview__post-span preview__author">Enter author name</span>
                   </div>
                   <span class="preview__post-span preview__date">12/23/3</span>
@@ -146,19 +146,19 @@
     
     <div class="main main__post-footer">
       <h3 class="post-footer__header main__header">Content</h3>
-      <label for="title" class="main-box__label">Post content (plain text)</label><br />
-      <textarea type="text" name="content" class="main-box__input" rows="5" cols="80"></textarea><br />
+      <label class="main-box__label" for="PostContent">Post content (plain text)</label><br />
+      <textarea id="PostContent" name="content" class="main-box__input" rows="5" cols="80"></textarea><br />
     </div>
 
     <template id="menuButtons" style="display: none;">
       <div style="display: flex; align-items: center;  flex-direction: row; gap: 10px;">
         <div style="display:flex; align-items: center; gap: 5px;">
-          <img src="../static/images/camera.svg">
+          <img src="../static/images/camera.svg" alt="upload new">
           <span style="color: #000000;">Upload New</span>
         </div>
         <label class="label-disable">
           <div onclick="deleteFile(this)" style="display: flex; align-items: center; gap: 5px;" class="label-disable">
-            <img class="label-disable" src="../static/images/trask_can.svg">
+            <img class="label-disable" src="../static/images/trash_can.svg" alt="delete image">
             <span class="label-disable" style="color: #E86961;">Remove</span>
           </div>
         </label>

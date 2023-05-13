@@ -67,8 +67,8 @@ type PostData struct {
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// posts, err := posts(db)
-		fposts, err := fposts(db)
-		rposts, err := rposts(db)
+		featuredPosts, err := featuredPosts(db)
+		recentPosts, err := recentPosts(db)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500) // В случае ошибки парсинга - возвращаем 500
 			log.Println(err)
@@ -85,8 +85,8 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		data := indexPageData{
 			Title:    "Blog for traveling",
 			Subtitle: "My best blog for adventures and burgers",
-			RPosts:   rposts,
-			FPosts:   fposts,
+			RPosts:   recentPosts,
+			FPosts:   featuredPosts,
 		}
 
 		err = ts.Execute(w, data) // Заставляем шаблонизатор вывести шаблон в тело ответа
@@ -115,7 +115,7 @@ func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			if err == sql.ErrNoRows {
 				// sql.ErrNoRows возвращается, когда в запросе к базе не было ничего найдено
-				// В таком случае мы возвращем 404 (not found) и пишем в тело, что ордер не найден
+				// В таком случае мы возвращаем 404 (not found) и пишем в тело, что ордер не найден
 				http.Error(w, "post not found", 404)
 				log.Println(err)
 				return
@@ -144,7 +144,7 @@ func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func fposts(db *sqlx.DB) ([]*FeaturedPosts, error) {
+func featuredPosts(db *sqlx.DB) ([]*FeaturedPosts, error) {
 	const query = `
 		SELECT
 			title,
@@ -159,7 +159,7 @@ func fposts(db *sqlx.DB) ([]*FeaturedPosts, error) {
 			post
 		WHERE featured = 1
 	`
-	// Такое объединение строк делается только для таблицы post, т.к. это зарезерированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
+	// Такое объединение строк делается только для таблицы post, т.к. это зарезервированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
 
 	var posts []*FeaturedPosts // Заранее объявляем массив с результирующей информацией
 
@@ -175,7 +175,7 @@ func fposts(db *sqlx.DB) ([]*FeaturedPosts, error) {
 	return posts, nil
 }
 
-func rposts(db *sqlx.DB) ([]*RecentPosts, error) {
+func recentPosts(db *sqlx.DB) ([]*RecentPosts, error) {
 	const query = `
 		SELECT
 			title,
@@ -190,7 +190,7 @@ func rposts(db *sqlx.DB) ([]*RecentPosts, error) {
 			post
 		WHERE featured = 0
 	`
-	// Такое объединение строк делается только для таблицы post, т.к. это зарезерированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
+	// Такое объединение строк делается только для таблицы post, т.к. это зарезервированное слово в SQL, наряду с SELECT, поэтому его нужно заключить в ``
 
 	var posts []*RecentPosts // Заранее объявляем массив с результирующей информацией
 
@@ -218,7 +218,7 @@ func postByID(db *sqlx.DB, postID int) (PostData, error) {
 		WHERE
 			post_id = ?
 	`
-	// В SQL-запросе добавились параметры, как в шаблоне. ? означает параметр, который мы передаем в запрос ниже
+	// В SQL-запросе добавились параметры, как в шаблоне. ? Означает параметр, который мы передаем в запрос ниже
 
 	var post PostData
 
@@ -232,7 +232,7 @@ func postByID(db *sqlx.DB, postID int) (PostData, error) {
 }
 
 func admin() func(w http.ResponseWriter, r *http.Request) {
-    return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		ts, err := template.ParseFiles("pages/admin.html")
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
@@ -240,39 +240,42 @@ func admin() func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		err = ts.Execute(w, 0)
-    }
+	}
 }
 
 func createPost(db *sqlx.DB) http.HandlerFunc {
-    return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 
-        reqData, err := io.ReadAll(r.Body)
-        if err != nil {
-            http.Error(w, "Failed to read request body", http.StatusBadRequest)
-            return
-        }
+		reqData, err := io.ReadAll(r.Body)
+		if err != nil {
+			http.Error(w, "Failed to read request body", http.StatusBadRequest)
+			return
+		}
 
-        var req createPostRequest
-        err = json.Unmarshal(reqData, &req)
-        if err != nil {
-            http.Error(w, "Failed to parse request body", http.StatusBadRequest)
-            return
-        }
+		var req createPostRequest
+		err = json.Unmarshal(reqData, &req)
+		if err != nil {
+			http.Error(w, "Failed to parse request body", http.StatusBadRequest)
+			return
+		}
 
-        err = savePost(db, req)
-        if err != nil {
-            http.Error(w, "Failed to save post", http.StatusInternalServerError)
-            return
-        }
+		err = savePost(db, req)
+		if err != nil {
+			http.Error(w, "Failed to save post", http.StatusInternalServerError)
+			return
+		}
 
-        // Handle successful post creation
-        w.WriteHeader(http.StatusOK)
-        w.Write([]byte("Post created successfully"))
-    }
+		// Handle successful post creation
+		w.WriteHeader(http.StatusOK)
+		_, err = w.Write([]byte("Post created successfully"))
+		if err != nil {
+			return
+		}
+	}
 }
 
 func savePost(db *sqlx.DB, req createPostRequest) error {
-    const query = `
+	const query = `
         INSERT INTO
             post
         (
@@ -289,14 +292,14 @@ func savePost(db *sqlx.DB, req createPostRequest) error {
             ?, ?, ?, ?, ?, ?, ?
         )
     `
-	
-    _, err := db.Exec(query, req.Title, req.Subtitle, req.PublishDate, req.Author, req.AuthorUrl, req.Title, req.Content)
+
+	_, err := db.Exec(query, req.Title, req.Subtitle, req.PublishDate, req.Author, req.AuthorUrl, req.Title, req.Content)
 
 	img, err := base64.StdEncoding.DecodeString(req.PostImg)
-	file, err := os.Create("static/img/" + req.Title) 
+	file, err := os.Create("static/img/" + req.Title)
 	// создаем файл с именем переданным от фронта в папке static/img
-		
+
 	_, err = file.Write(img) // Записываем контент картинки в файл
 
-    return err
+	return err
 }

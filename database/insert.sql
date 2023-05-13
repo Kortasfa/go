@@ -76,7 +76,7 @@ In conclusion, waterfalls are natural wonders that never fail to amaze and inspi
 
 
 
-INSERT INTO post (title, subtitle, author, author_url, publish_date, image_url, featured, content) VALUES ('Through The Mist', 'Travel makes you see what a tiny place you occupy in the world.', 'William Wong', '/static/images/william_wong.jpg', '9/25/2015', '/static/images/through_the_mist.jpg', 0, 'As a traveler, I have come to realize that one of the most mesmerizing experiences is watching the world awaken from behind a veil of mist. It is a unique moment when everything around you remains shrouded in mystery, and all you can hear are the sounds of nature, and all you can feel is the cool breeze on your skin. It's a moment that reminds you of how tiny you are in this vast world and how there's so much more to explore beyond your comfort zone.
+INSERT INTO post (title, subtitle, author, author_url, publish_date, image_url, featured, content) VALUES ('Through The Mist', 'Travel makes you see what a tiny place you occupy in the world.', 'William Wong', '/static/images/william_wong.jpg', '9/25/2015', '/static/images/through_the_mist.jpg', 0, 'As a traveler, I have come to realize that one of the most mesmerizing experiences is watching the world awaken from behind a veil of mist. It is a unique moment when everything around you remains shrouded in mystery, and all you can hear are the sounds of nature, and all you can feel is the cool breeze on your skin. It’s a moment that reminds you of how tiny you are in this vast world and how there’s so much more to explore beyond your comfort zone.
 
 I had the privilege of experiencing one such journey through the mist during my recent visit to the Scottish Highlands. As I set out on the trek, I was greeted with a dense fog that had descended upon the hills overnight. Initially, I felt a little apprehensive about navigating through the thick mist; however, as I began walking, I quickly realized that it was one of the most beautiful things I had ever experienced.
 
@@ -108,7 +108,7 @@ Another morning, I decided to take a hot air balloon ride over the city. We rose
 
 Finally, on my last morning in Cusco, I woke up early once again to visit the famous Machu Picchu ruins. I arrived just as the gates opened, and I was able to experience this incredible place without the crowds that often fill it during the day. As I stood at the top of the ruins, watching the sun rise over the mountains, I felt truly grateful for the opportunity to experience such a magical moment.
 
-In the end, "Awaken Early" became one of my favorite journeys. The early mornings allowed me to experience Cusco in a way that few others have, and I felt like I had truly immersed myself in the city’s culture and history. It reminded me that sometimes the best moments happen when we’re willing to wake up a little earlier and experience the world as it wakes up around us.'
+In the end, "Awaken Early" became one of my favorite journeys. The early mornings allowed me to experience Cusco in a way that few others have, and I felt like I had truly immersed myself in the citys culture and history. It reminded me that sometimes the best moments happen when we’re willing to wake up a little earlier and experience the world as it wakes up around us.'
 );
 
 

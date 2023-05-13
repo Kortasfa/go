@@ -20,8 +20,8 @@ postDate.addEventListener('change', function () {
 });
 
 function liveUpdate(element, previewClass) {
-  var x = element.value;
-  var y = document.getElementsByClassName(previewClass);
+  const x = element.value;
+  const y = document.getElementsByClassName(previewClass);
   Array.prototype.forEach.call(y, el => {
     el.innerText = x;
   });
@@ -85,14 +85,12 @@ function previewFile(preview, image, file) {
 function replace(before, after) {
   before.innerHTML = after.innerHTML;
 }
-
-function replaceText(before, after) {
-  before.innerHTML = after;
-}
-
 function deleteFile(el) {
-  var temp = (el.closest("div > p"));
+  let temp = (el.closest("div > p"));
   console.log(temp.id);
+  let c;
+  let img;
+  let type;
   if (temp.id === 'uploadButton') {
     c = uploadButtonSave;
     img = 'upload_author-image.svg';
@@ -110,7 +108,7 @@ function deleteFile(el) {
   }
 
   document.getElementById(temp.id).textContent = c;
-  var q = (temp.closest("div"));
+  const q = (temp.closest("div"));
   q.firstElementChild.src = '../static/images/' + img;
   type.src = '../static/images/default.svg';
 }
@@ -122,7 +120,7 @@ document.body.addEventListener('click', function (e) {
   }
 });
 
-function validateForm(event) {
+function validateForm() {
 
   // Get all input elements with the "required" attribute
   const requiredInputs = document.querySelectorAll('input[required]');
@@ -138,15 +136,15 @@ function validateForm(event) {
   warningButton.style.display = 'block'; // Make the warning button visible
   document.querySelector('.warning-button_wrong').style.display = 'none';
 
-  var formData = new FormData(document.forms.post);
+  const formData = new FormData(document.forms);
 
-  var object = {};
-  var imagePromises = [];
+  let object = {};
+  let imagePromises = [];
 
   formData.forEach(function (value, key) {
     if (value instanceof File) {
-      var reader = new FileReader();
-      var imagePromise = new Promise(function (resolve, reject) {
+      let reader = new FileReader();
+      let imagePromise = new Promise(function (resolve, reject) {
         reader.onload = function (event) {
           object[key] = event.target.result;
           resolve();
@@ -165,7 +163,7 @@ function validateForm(event) {
 
   Promise.all(imagePromises)
     .then(function () {
-      var json = JSON.stringify(object);
+      let json = JSON.stringify(object);
 
       console.log(json);
     })
@@ -178,8 +176,8 @@ function validateForm(event) {
 }
 
 document.addEventListener("DOMContentLoaded", function () { //Check if fields are not empty
-  var elements = document.getElementsByTagName("INPUT");
-  for (var i = 0; i < elements.length; i++) {
+  let elements = document.getElementsByTagName("INPUT");
+  for (let i = 0; i < elements.length; i++) {
     elements[i].oninvalid = function (e) {
       e.target.setCustomValidity("");
       if (!e.target.validity.valid) {
