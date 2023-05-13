@@ -293,12 +293,16 @@
     font-family: 'Oxygen';
     font-size: 14px;
     border-radius: 5px;
+
 }
 
 .warning-button_wrong {
     background-color: #FFEBEA;
     border-left: 2px solid #E86961;
     display: none;
+    /* opacity: 0;
+    transform: translateY(-100%); /* Start with element positioned above the viewport */
+    /* transition: opacity 3s ease, transform 3s ease;  */
 }
 
 .warning-button_good {

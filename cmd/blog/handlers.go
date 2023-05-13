@@ -3,9 +3,14 @@ package main
 import (
 	"database/sql"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
+
+	"encoding/base64"
+	"encoding/json" // Импортируем библиотеку для работы с JSON
 
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
@@ -40,6 +45,16 @@ type RecentPosts struct {
 	Featured    string `db:"featured"`
 	PostID      string `db:"post_id"`
 	PostURL     string // URL ордера, на который мы будем переходить для конкретного поста
+}
+
+type createPostRequest struct {
+	Title       string `json:"title"`
+	Subtitle    string `json:"subtitle"`
+	PublishDate string `json:"publish_date"`
+	Author      string `json:"author"`
+	AuthorUrl   string `json:"author_url"`
+	PostImg     string `json:"post_img"`
+	Content     string `json:"content"`
 }
 
 type PostData struct {
@@ -149,7 +164,7 @@ func fposts(db *sqlx.DB) ([]*FeaturedPosts, error) {
 	var posts []*FeaturedPosts // Заранее объявляем массив с результирующей информацией
 
 	err := db.Select(&posts, query) // Делаем запрос в базу данных
-	if err != nil {                  // Проверяем, что запрос в базу данных не завершился с ошибкой
+	if err != nil {                 // Проверяем, что запрос в базу данных не завершился с ошибкой
 		return nil, err
 	}
 
@@ -180,7 +195,7 @@ func rposts(db *sqlx.DB) ([]*RecentPosts, error) {
 	var posts []*RecentPosts // Заранее объявляем массив с результирующей информацией
 
 	err := db.Select(&posts, query) // Делаем запрос в базу данных
-	if err != nil {                  // Проверяем, что запрос в базу данных не завершился с ошибкой
+	if err != nil {                 // Проверяем, что запрос в базу данных не завершился с ошибкой
 		return nil, err
 	}
 
@@ -214,4 +229,74 @@ func postByID(db *sqlx.DB, postID int) (PostData, error) {
 	}
 
 	return post, nil
+}
+
+func admin() func(w http.ResponseWriter, r *http.Request) {
+    return func(w http.ResponseWriter, r *http.Request) {
+		ts, err := template.ParseFiles("pages/admin.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+		err = ts.Execute(w, 0)
+    }
+}
+
+func createPost(db *sqlx.DB) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+
+        reqData, err := io.ReadAll(r.Body)
+        if err != nil {
+            http.Error(w, "Failed to read request body", http.StatusBadRequest)
+            return
+        }
+
+        var req createPostRequest
+        err = json.Unmarshal(reqData, &req)
+        if err != nil {
+            http.Error(w, "Failed to parse request body", http.StatusBadRequest)
+            return
+        }
+
+        err = savePost(db, req)
+        if err != nil {
+            http.Error(w, "Failed to save post", http.StatusInternalServerError)
+            return
+        }
+
+        // Handle successful post creation
+        w.WriteHeader(http.StatusOK)
+        w.Write([]byte("Post created successfully"))
+    }
+}
+
+func savePost(db *sqlx.DB, req createPostRequest) error {
+    const query = `
+        INSERT INTO
+            post
+        (
+            title,
+            subtitle,
+            publish_date,
+            author,
+            author_url,
+            image_url,
+            content
+        )
+        VALUES
+        (
+            ?, ?, ?, ?, ?, ?, ?
+        )
+    `
+	
+    _, err := db.Exec(query, req.Title, req.Subtitle, req.PublishDate, req.Author, req.AuthorUrl, req.Title, req.Content)
+
+	img, err := base64.StdEncoding.DecodeString(req.PostImg)
+	file, err := os.Create("static/img/" + req.Title) 
+	// создаем файл с именем переданным от фронта в папке static/img
+		
+	_, err = file.Write(img) // Записываем контент картинки в файл
+
+    return err
 }

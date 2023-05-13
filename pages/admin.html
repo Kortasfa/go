@@ -50,7 +50,7 @@
       <h3 class="main__header">Main Information</h3>
       <div class="main__content">
         <section class="main-box">
-          <form action="" class="main-box__form" id="myform" onsubmit="return validateForm(event)">
+          <form action="" class="main-box__form" id="myform" onsubmit="return validateForm(event)" name="post">
             <label for="title" class="main-box__label">Title</label><br />
             <input type="text" name="title" class="main-box__input main-box__input_form" id="PostName" required ><br />
             <label for="description" class="main-box__label">Short description</label><br />
@@ -60,36 +60,36 @@
             <input type="text" name="author_name" class="main-box__input main-box__input_form" id="PostAuthor"
               required><br />
             <div class="main-box__upload-photos">
-              <input type="file" name="author_image" id="author-input" required><br />
-              <label for="author-input" class="main-box__label">Author Photo<br />
+              <input type="file" name="author_image" id="authorInput" required><br />
+              <label for="authorInput" class="main-box__label">Author Photo<br />
                 <div class="main-box__images images__author-image" id="author__menu-buttons">
-                  <img src="" id="author-preview" height="50" width="50" style="border-radius: 25px;"
+                  <img src="" id="authorPreview" height="50" width="50" style="border-radius: 25px;"
                     onerror="this.onerror=null; this.src='../static/images/upload_author-image.svg'">
-                  <p style="margin-left: 15px;" id="upload-button">Upload</p>
+                  <p style="margin-left: 15px;" id="uploadButton">Upload</p>
                 </div>
               </label>
             </div>
             <label for="publish-date" class="main-box__label">Publish Date</label>
             <input type="date" name="publish-date" class="main-box__input main-box__input_form" id="PostDate" required>
             <div class="main-box__upload-photos">
-              <input type="file" id="hero-input" name="hero_image" required><br />
-              <label for="hero-input" class="main-box__label">
+              <input type="file" id="firstHeroInput" name="hero_image" required><br />
+              <label for="firstHeroInput" class="main-box__label">
                 <span>Hero Image</span>
                 <div class="main-box__images" id="hero1__menu-buttons">
-                  <img src="" id="hero-preview" height="180" width="600"
+                  <img src="" id="firstHeroPreview" height="180" width="600"
                     onerror="this.onerror=null; this.src='../static/images/upload_hero-image.svg'">
-                  <p id="first-hero">Size up to 10mb. Format: png, jpeg, gif.</p>
+                  <p id="firstHero">Size up to 10mb. Format: png, jpeg, gif.</p>
                 </div>
               </label>
             </div>
             <div class="main-box__upload-photos">
-              <input type="file" id="hero-input2" name="hero_image" required><br />
-              <label for="hero-input2" class="main-box__label">
+              <input type="file" id="secondHeroInput" name="hero_image2" required><br />
+              <label for="secondHeroInput" class="main-box__label">
                 <span>Hero Image</span>
                 <div class="main-box__images" id="hero2__menu-buttons">
-                  <img src="" id="hero-preview2" height="180" width="350"
+                  <img src="" id="secondHeroPreview" height="180" width="350"
                     onerror="this.onerror=null; this.src='../static/images/upload_hero-image-2.svg'">
-                  <p id="second-hero">Size up to 5mb. Format: png, jpeg, gif.</p>
+                  <p id="secondHero">Size up to 5mb. Format: png, jpeg, gif.</p>
                 </div>
               </label>
             </div>
@@ -107,10 +107,10 @@
                   <div class="preview__image-button"></div>
                 </div>
                 <div class="preview__border--third-bottom">
-                  <h3 class="preview__post-name PreviewPostName">New Post</h3>
-                  <p class="preview__post-description description__length PreviewPostDescription description__lenght">
+                  <h3 class="preview__post-name preview__h3">New Post</h3>
+                  <p class="preview__post-description description__length preview__description description__lenght">
                     Please enter any description</p>
-                  <img class="preview__border--content__image" id="article-preview" style="width: 100%;" src=""
+                  <img class="preview__border--content__image" id="articlePreview" style="width: 100%;" src=""
                     onerror="this.onerror=null; this.src='../static/images/default.svg'">
                 </div>
               </div>
@@ -122,19 +122,19 @@
             <span class="preview__title">Post card preview</span>
             <div class="preview__border preview__border--card">
               <article class="preview__post">
-                <img class="preview__post-img" id="card-preview" style="width: 100%" src=""
+                <img class="preview__post-img" id="cardPreview" style="width: 100%" src=""
                   onerror="this.onerror=null; this.src='../static/images/default.svg'">
                 <div class="preview__post-heading-text">
-                  <h3 class="preview__post-heading PreviewPostName">New Post</h3>
-                  <p class="preview__post-text PreviewPostDescription">Please, enter any description</p>
+                  <h3 class="preview__post-heading preview__h3">New Post</h3>
+                  <p class="preview__post-text preview__description">Please, enter any description</p>
                 </div>
                 <div class="preview__post-footer">
                   <div class="preview__post-author-span">
-                    <img class="preview__post-author" id="card-author-preview" src=""
+                    <img class="preview__post-author" id="cardAuthorPreview" src=""
                       onerror="this.onerror=null; this.src='../static/images/default.svg'"></img>
-                    <span class="preview__post-span PreviewPostAuthor">Enter author name</span>
+                    <span class="preview__post-span preview__author">Enter author name</span>
                   </div>
-                  <span class="preview__post-span PreviewPostDate">12/23/3</span>
+                  <span class="preview__post-span preview__date">12/23/3</span>
                 </div>
               </article>
               <div class="preview__border-shades preview__border-shades--bottom"></div>
@@ -143,14 +143,14 @@
         </section>
       </div>
     </main>
-
+    
     <div class="main main__post-footer">
       <h3 class="post-footer__header main__header">Content</h3>
       <label for="title" class="main-box__label">Post content (plain text)</label><br />
-      <textarea type="text" name="title" class="main-box__input" rows="5" cols="80"></textarea><br />
+      <textarea type="text" name="content" class="main-box__input" rows="5" cols="80"></textarea><br />
     </div>
 
-    <template id="menu-buttons" style="display: none;">
+    <template id="menuButtons" style="display: none;">
       <div style="display: flex; align-items: center;  flex-direction: row; gap: 10px;">
         <div style="display:flex; align-items: center; gap: 5px;">
           <img src="../static/images/camera.svg">

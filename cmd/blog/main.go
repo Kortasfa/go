@@ -28,6 +28,10 @@ func main() {
 	mux := mux.NewRouter()
 	mux.HandleFunc("/home", index(dbx)) // Передаём клиент к базе данных в ф-ию обработчик запроса
 
+	mux.HandleFunc("/admin", admin()) // Страничка админа, бд не нужно
+
+	mux.HandleFunc("/admin", createPost(dbx)).Methods(http.MethodPost)
+
 	// Указывем orderID поста в URL для перехода на конкретный пост
 	mux.HandleFunc("/post/{PostID}", post(dbx))
 
@@ -45,3 +49,4 @@ func openDB() (*sql.DB, error) {
 	// Здесь прописываем соединение к базе данных
 	return sql.Open(dbDriverName, "root:root123321@tcp(localhost:3306)/blog?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true")
 }
+

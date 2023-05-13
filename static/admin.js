@@ -4,19 +4,19 @@ const postAuthor = document.getElementById('PostAuthor');
 const postDate = document.getElementById('PostDate');
 
 postName.addEventListener('keyup', function () {
-  liveUpdate(postName, "PreviewPostName");
+  liveUpdate(postName, "preview__h3");
 });
 
 postDesc.addEventListener('keyup', function () {
-  liveUpdate(postDesc, "PreviewPostDescription");
+  liveUpdate(postDesc, "preview__description");
 });
 
 postAuthor.addEventListener('keyup', function () {
-  liveUpdate(postAuthor, "PreviewPostAuthor");
+  liveUpdate(postAuthor, "preview__author");
 });
 
-postDate.addEventListener('keyup', function () {
-  liveUpdate(postDate, "PreviewPostDate");
+postDate.addEventListener('change', function () {
+  liveUpdate(postDate, "preview__date");
 });
 
 function liveUpdate(element, previewClass) {
@@ -27,40 +27,40 @@ function liveUpdate(element, previewClass) {
   });
 }
 
-const uploadpreview1 = document.getElementById("hero-preview");
-const uploadpreview2 = document.getElementById("hero-preview2");
-const uploadpreview3 = document.getElementById("author-preview");
+const firstUploadPreview = document.getElementById("firstHeroPreview");
+const secondUploadPreview = document.getElementById("secondHeroPreview");
+const thirdUploadPreview = document.getElementById("authorPreview");
 
-const articlepreview = document.getElementById("article-preview");
-const cardpreview = document.getElementById("card-preview");
-const cardauthorpreview = document.getElementById("card-author-preview");
+const articlePreview = document.getElementById("articlePreview");
+const cardPreview = document.getElementById("cardPreview");
+const cardAuthorPreview = document.getElementById("cardAuthorPreview");
 
-const fileInput1 = document.getElementById("hero-input");
-const fileInput2 = document.getElementById("hero-input2");
-const fileInput3 = document.getElementById("author-input");
+const firstFileInput = document.getElementById("firstHeroInput");
+const secondFileInput = document.getElementById("secondHeroInput");
+const thirdFileInput = document.getElementById("authorInput");
 
-const uploadButton = document.getElementById('upload-button');
-const firstHero = document.getElementById('first-hero');
-const secondHero = document.getElementById('second-hero');
+const uploadButton = document.getElementById('uploadButton');
+const firstHero = document.getElementById('firstHero');
+const secondHero = document.getElementById('secondHero');
 
 const firstHeroSave = firstHero.innerText;
 const secondHeroSave = secondHero.innerText;
 const uploadButtonSave = uploadButton.innerText;
 
-const menuButtons = document.getElementById('menu-buttons');
+const menuButtons = document.getElementById('menuButtons');
 
-fileInput1.addEventListener("change", function () {
-  previewFile(uploadpreview1, articlepreview, this.files[0]);
+firstFileInput.addEventListener("change", function () {
+  previewFile(firstUploadPreview, articlePreview, this.files[0]);
   replace(firstHero, menuButtons);
 });
 
-fileInput2.addEventListener("change", function () {
-  previewFile(uploadpreview2, cardpreview, this.files[0]);
+secondFileInput.addEventListener("change", function () {
+  previewFile(secondUploadPreview, cardPreview, this.files[0]);
   replace(secondHero, menuButtons);
 });
 
-fileInput3.addEventListener("change", function () {
-  previewFile(uploadpreview3, cardauthorpreview, this.files[0]);
+thirdFileInput.addEventListener("change", function () {
+  previewFile(thirdUploadPreview, cardAuthorPreview, this.files[0]);
   replace(uploadButton, menuButtons);
 });
 
@@ -92,20 +92,21 @@ function replaceText(before, after) {
 
 function deleteFile(el) {
   var temp = (el.closest("div > p"));
-  if (temp.id === 'upload-button'){
+  console.log(temp.id);
+  if (temp.id === 'uploadButton') {
     c = uploadButtonSave;
     img = 'upload_author-image.svg';
-    type = cardauthorpreview;
+    type = cardAuthorPreview;
   }
-  if (temp.id === 'first-hero'){
+  if (temp.id === 'firstHero') {
     c = firstHeroSave;
     img = 'upload_hero-image.svg';
-    type = articlepreview;
+    type = articlePreview;
   }
-  if (temp.id === 'second-hero'){
+  if (temp.id === 'secondHero') {
     c = secondHeroSave;
     img = 'upload_hero-image-2.svg';
-    type = cardpreview;
+    type = cardPreview;
   }
 
   document.getElementById(temp.id).textContent = c;
@@ -115,20 +116,17 @@ function deleteFile(el) {
 }
 
 
-document.body.addEventListener('click', function(e) {
-  if(e.target.className === 'label-disable') {
+document.body.addEventListener('click', function (e) {
+  if (e.target.className === 'label-disable') {
     e.preventDefault();
   }
 });
 
 function validateForm(event) {
-  // Prevent the form from submitting
-  event.preventDefault();
 
   // Get all input elements with the "required" attribute
   const requiredInputs = document.querySelectorAll('input[required]');
 
-  // Check if any required fields are empty
   for (let i = 0; i < requiredInputs.length; i++) {
     if (requiredInputs[i].value.trim() === '') {
       alert('Please fill in all required fields.');
@@ -136,30 +134,63 @@ function validateForm(event) {
     }
   }
 
-  // All fields are completed
   const warningButton = document.querySelector('.warning-button_good');
   warningButton.style.display = 'block'; // Make the warning button visible
   document.querySelector('.warning-button_wrong').style.display = 'none';
 
-  // Optionally, you can reset the form after displaying the warning button
-  // event.target.reset();
+  var formData = new FormData(document.forms.post);
 
-  return true; // Allow form submission
+  var object = {};
+  var imagePromises = [];
+
+  formData.forEach(function (value, key) {
+    if (value instanceof File) {
+      var reader = new FileReader();
+      var imagePromise = new Promise(function (resolve, reject) {
+        reader.onload = function (event) {
+          object[key] = event.target.result;
+          resolve();
+        };
+        reader.onerror = function (event) {
+          reject(event.error);
+        };
+      });
+
+      reader.readAsDataURL(value);
+      imagePromises.push(imagePromise);
+    } else {
+      object[key] = value;
+    }
+  });
+
+  Promise.all(imagePromises)
+    .then(function () {
+      var json = JSON.stringify(object);
+
+      console.log(json);
+    })
+    .catch(function (error) {
+      console.error('An error occurred while reading the image:', error);
+    });
+
+
+  return true; 
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () { //Check if fields are not empty
   var elements = document.getElementsByTagName("INPUT");
   for (var i = 0; i < elements.length; i++) {
-      elements[i].oninvalid = function(e) {
-          e.target.setCustomValidity("");
-          if (!e.target.validity.valid) {
-              e.target.setCustomValidity("This field cannot be left blank");
-              document.querySelector('.warning-button_wrong').style.display = 'block';
-          }
-      };
-      elements[i].oninput = function(e) {
-          e.target.setCustomValidity("");
-      };
+    elements[i].oninvalid = function (e) {
+      e.target.setCustomValidity("");
+      if (!e.target.validity.valid) {
+        e.target.setCustomValidity("This field cannot be left blank");
+        document.querySelector('.warning-button_wrong').style.display = 'block';
+      }
+    };
+    elements[i].oninput = function (e) {
+      e.target.setCustomValidity("");
+    };
   }
-}) 
+})
+
 
