@@ -2,103 +2,108 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Escape.</title>
-  <link href="/static/css/main.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape.</title>
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="heading-description">
-    <header class="heading">
-      <span class="logo">Escape.</span>
-      <nav class="heading__nav nav">
-        <a class="nav__link" href="#">HOME</a>
-        <a class="nav__link" href="#">CATEGORIES</a>
-        <a class="nav__link" href="#">ABOUT</a>
-        <a class="nav__link" href="#">CONTACT</a>
-      </nav>
+<div class="heading-description">
+    <header class="heading logo-menu">
+        <span class="logo">Escape.</span>
+        <nav class="heading__nav nav">
+            <a class="nav__link" href="#">HOME</a>
+            <a class="nav__link" href="#">CATEGORIES</a>
+            <a class="nav__link" href="#">ABOUT</a>
+            <a class="nav__link" href="#">CONTACT</a>
+        </nav>
+        <img src="../static/images/menu.svg" alt="" class="heading__menu-img">
     </header>
     <div class="description">
-      <h1 class="description__slogan">Let's do it together.</h1>
-      <p class="description__text">We travel the world in search of stories. Come along for the ride.</p>
-      <button class="button description__button">View Latest Posts</button>
+        <h1 class="description__slogan">Let's do it together.</h1>
+        <p class="description__text">We travel the world in search of stories. Come along for the ride.</p>
+        <button class="button description__button">View Latest Posts</button>
     </div>
-  </div>
-  <div class="menu">
+</div>
+<div class="menu">
     <a class="menu__link" href="#">Nature</a>
     <a class="menu__link" href="#">Photography</a>
     <a class="menu__link" href="#">Relaxation</a>
     <a class="menu__link" href="#">Vacation</a>
     <a class="menu__link" href="#">Travel</a>
     <a class="menu__link" href="#">Adventure</a>
-  </div>
-  <div class="main">
+</div>
+<div class="main">
     <div class="featured">
-      <h2 class="featured__heading main__heading">Featured Posts</h2>
-      <div class="featured__posts">
-        {{ range .FPosts }}
-        <article class="featured__post post"
-          style="background: url('{{ .ImageUrl }}') no-repeat; background-size: 100%;">
-          <a href="{{ .PostURL }}" style="text-decoration: none">
-            <h2 class="post__heading">{{ .Title }}</h2>
-          </a>
-          <p class="post__text">{{ .Subtitle }}</p>
-          <div class="post__footer footer">
-            <div class="footer__author">
-              <img class="post__image" src="{{ .AuthorUrl }}" alt="{{ .Author }}">
-              <span class="post__image-author">{{ .Author }}</span>
-            </div>
-            <span class="post__image-date">{{ .PublishDate }}</span>
-        </article>
-        {{ end }}
-      </div>
+        <h2 class="featured__heading main__heading">Featured Posts</h2>
+        <div class="featured__posts">
+            {{ range .FPosts }}
+            <article class="featured__post post"
+                     style="background: url('{{ .ImageUrl }}') no-repeat; background-size: 590px 100%">
+                <a href="{{ .PostURL }}" style="text-decoration: none; margin-top: auto;">
+                    <h2 class="post__heading">{{ .Title }}</h2>
+                </a>
+                <p class="post__text">{{ .Subtitle }}</p>
+                <div class="post__footer footer">
+                    <div class="footer__author">
+                        <img class="post__image" src="{{ .AuthorUrl }}" alt="{{ .Author }}">
+                        <span class="post__image-author">{{ .Author }}</span>
+                    </div>
+                    <span class="post__image-date">{{ .PublishDate }}</span>
+                </div>
+            </article>
+            {{ end }}
+        </div>
     </div>
     <div class="most-recent">
-      <h2 class="most-recent__heading main__heading">Most Recent</h2>
-      <section class="most-recent__posts">
-        {{ range .RPosts }}
-        <article class="most-recent__post recent-post ">
-          <img class="recent-post__img" src="{{ .ImageUrl }}" alt="{{ .Title}}" style="width: 100%">
-          <div class="recent-post__heading-text">
-            <a href=" {{ .PostURL}}" style="text-decoration: none">
-              <h3 class="recent-post__heading">{{ .Title }}</h3>
-            </a>
-            <p class="recent-post__text">{{ .Subtitle }}</p>
-          </div>
-          <div class="recent-post__footer">
-            <div class="recent-post__author-span">
-              <img class="recent-post__author" src="{{ .AuthorUrl}}" alt="{{ .Author }}">
-              <span class="recent-post__span">{{ .Author }}</span>
-            </div>
-            <span class="recent-post__span">{{ .PublishDate }}</span>
-          </div>
-        </article>
-        {{ end }}
-      </section>
+        <h2 class="most-recent__heading main__heading">Most Recent</h2>
+        <section class="most-recent__posts">
+            {{ range .RPosts }}
+            <article class="most-recent__post recent-post ">
+                <img class="recent-post__img" src="{{ .ImageUrl }}" alt="{{ .Title}}">
+                <div class="recent-post__heading-text">
+                    <a href=" {{ .PostURL}}" style="text-decoration: none">
+                        <h3 class="recent-post__heading">{{ .Title }}</h3>
+                    </a>
+                    <p class="recent-post__text">{{ .Subtitle }}</p>
+                </div>
+                <div class="recent-post__footer">
+                    <div class="recent-post__author-span">
+                        <img class="recent-post__author" src="{{ .AuthorUrl}}" alt="{{ .Author }}">
+                        <span class="recent-post__span">{{ .Author }}</span>
+                    </div>
+                    <span class="recent-post__span">{{ .PublishDate }}</span>
+                </div>
+            </article>
+            {{ end }}
+        </section>
 
     </div>
-  </div>
-  <div class="intouch-basement">
+</div>
+<div class="intouch-basement">
     <div class="intouch">
-      <h2 class="intouch__name">Stay in Touch</h2>
-      <form class="intouch__data data">
-        <input class="data__email" type="text" name="email" placeholder="Enter your email address">
-        <input class="data__submit" type="submit">
-      </form>
+        <h2 class="intouch__name">Stay in Touch</h2>
+        <form class="intouch__data data">
+            <input class="data__email" type="text" name="email" placeholder="Enter your email address">
+            <input class="data__submit" type="submit">
+        </form>
     </div>
     <footer class="basement">
-      <span class="logo">Escape.</span>
-      <nav class="basement__nav nav">
-        <a class="nav__nav-link" href="#">HOME</a>
-        <a class="nav__nav-link" href="#">CATEGORIES</a>
-        <a class="nav__nav-link" href="#">ABOUT</a>
-        <a class="nav__nav-link" href="#">CONTACT</a>
-      </nav>
+        <div class="basement__flex logo-menu">
+            <span class="logo">Escape.</span>
+            <nav class="basement__nav nav">
+                <a class="nav__nav-link" href="#">HOME</a>
+                <a class="nav__nav-link" href="#">CATEGORIES</a>
+                <a class="nav__nav-link" href="#">ABOUT</a>
+                <a class="nav__nav-link" href="#">CONTACT</a>
+            </nav>
+        </div>
     </footer>
-  </div>
+</div>
 </body>
 
 </html>

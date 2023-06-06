@@ -36,6 +36,7 @@
 
 .content__heading {
     margin-top: 40px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -63,7 +64,6 @@
 
 .main {
     background-color: #FFF;
-    margin-top: 20px;
     padding: 40px;
 }
 
@@ -92,7 +92,7 @@
 .main-box__input {
     width: 100%;
     padding: 15px 20px;
-    margin: 4px 0 30px;
+    margin: 4px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -100,14 +100,19 @@
     color: #2E2E2E;
 }
 
+.main-box__input__warning {
+    border-bottom-color: #E86961;
+    background-color: #FFFFFF;
+}
+
 .main-box__input_form {
-    background: #F7F7F7;
+    background-color: white;
     border-bottom: 1px solid #2E2E2E;
     border-radius: 5px 5px 0 0;
 }
 
 .main-box__upload-photos {
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .main-box__upload-photos>input {
@@ -119,6 +124,7 @@
     align-items: center;
     font: 400 16px 'Oxygen';
     color: #2E2E2E;
+    margin-top: 10px;
 }
 
 .preview {
@@ -280,7 +286,7 @@
 }
 
 .warning-button {
-    margin-top: 30px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -289,20 +295,37 @@
     font-family: 'Oxygen', serif;
     font-size: 14px;
     border-radius: 5px;
-
 }
 
 .warning-button_wrong {
     background-color: #FFEBEA;
     border-left: 2px solid #E86961;
-    display: none;
-    /* opacity: 0;
-    transform: translateY(-100%); /* Start with element positioned above the viewport */
-    /* transition: opacity 3s ease, transform 3s ease;  */
+    opacity: 0;
+    height: 0;
+    transition: height 0.3s, opacity 0.3s;
 }
 
 .warning-button_good {
     background-color: #E6FCEF;
     border-left: 2px solid #67C38C;
-    display: none;
+    opacity: 0;
+    height: 0;
+    transition: height 0.3s, opacity 0.3s;
+}
+
+.warning-button_active {
+    opacity: 1;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.main-box__input-warning {
+    margin-bottom: 10px;
+    visibility: hidden;
+    font: 400 12px 'Oxygen';
+    color: #E86961;;
+}
+
+.main-box__input-warning_active {
+    visibility: visible;
 }

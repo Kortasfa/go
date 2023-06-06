@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"encoding/base64"
 	"encoding/json" // Импортируем библиотеку для работы с JSON
@@ -49,11 +50,14 @@ type RecentPosts struct {
 
 type createPostRequest struct {
 	Title       string `json:"title"`
-	Subtitle    string `json:"subtitle"`
-	PublishDate string `json:"publish_date"`
-	Author      string `json:"author"`
-	AuthorUrl   string `json:"author_url"`
-	PostImg     string `json:"post_img"`
+	Subtitle    string `json:"description"`
+	PublishDate string `json:"publish-date"`
+	Author      string `json:"author_name"`
+	AuthorUrl   string `json:"author_image"`
+	AuthorExt   string `json:"author_ext"`
+	HeroImg     string `json:"hero_image"`
+	HeroExt     string `json:"hero_ext"`
+	HeroImg2    string `json:"hero_image2"`
 	Content     string `json:"content"`
 }
 
@@ -243,7 +247,19 @@ func admin() func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func createPost(db *sqlx.DB) http.HandlerFunc {
+func login() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ts, err := template.ParseFiles("pages/login.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+		err = ts.Execute(w, 0)
+	}
+}
+
+func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		reqData, err := io.ReadAll(r.Body)
@@ -253,6 +269,7 @@ func createPost(db *sqlx.DB) http.HandlerFunc {
 		}
 
 		var req createPostRequest
+
 		err = json.Unmarshal(reqData, &req)
 		if err != nil {
 			http.Error(w, "Failed to parse request body", http.StatusBadRequest)
@@ -293,12 +310,21 @@ func savePost(db *sqlx.DB, req createPostRequest) error {
         )
     `
 
-	_, err := db.Exec(query, req.Title, req.Subtitle, req.PublishDate, req.Author, req.AuthorUrl, req.Title, req.Content)
+	Path := "/static/images/"
+	AuthorUrl := Path + req.Author + req.AuthorExt
+	ImageUrl := Path + req.Title + req.HeroExt
+	_, err := db.Exec(query, req.Title, req.Subtitle, req.PublishDate, req.Author, AuthorUrl, ImageUrl, req.Content)
 
-	img, err := base64.StdEncoding.DecodeString(req.PostImg)
-	file, err := os.Create("static/img/" + req.Title)
-	// создаем файл с именем переданным от фронта в папке static/img
+	heroImg := strings.Split(req.HeroImg, ",")[1]
+	img, err := base64.StdEncoding.DecodeString(heroImg)
 
+	file, err := os.Create("static/images/" + req.Title + req.HeroExt)
+	_, err = file.Write(img) // Записываем контент картинки в файл
+
+	authorImg := strings.Split(req.AuthorUrl, ",")[1]
+	img, err = base64.StdEncoding.DecodeString(authorImg)
+
+	file, err = os.Create("static/images/" + req.Author + req.AuthorExt)
 	_, err = file.Write(img) // Записываем контент картинки в файл
 
 	return err

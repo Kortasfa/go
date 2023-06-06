@@ -30,7 +30,9 @@ func main() {
 
 	router.HandleFunc("/admin", admin()) // Страничка админа, бд не нужно
 
-	router.HandleFunc("/admin", createPost(dbx)).Methods(http.MethodPost)
+	router.HandleFunc("/login", login()) // Страничка админа, бд не нужно
+
+	router.HandleFunc("/api/post", createPost(dbx)).Methods(http.MethodPost) //Обработка json запроса
 
 	// Указываем orderID поста в URL для перехода на конкретный пост
 	router.HandleFunc("/post/{PostID}", post(dbx))

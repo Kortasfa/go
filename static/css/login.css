@@ -17,12 +17,22 @@
     flex-direction: column;
     justify-content: center;
     color: white;
-    font-family: 'Lora';
+    font-family: 'Lora', serif;
     height: 100vh;
 }
 
+.title {
+    font: 400 45px 'Lora';
+    margin-bottom: 10px;
+}
+
+.title_small {
+    font: 400 25px 'Lora';
+}
+
+
 .slogan {
-    font-family: "Oxygen";
+    font-family: "Oxygen", serif;
     font-size: 17px;
 }
 
@@ -30,24 +40,21 @@
     height: 70vh;
     width: 30vw;
     background: white;
-    font-family: 'Lora';
+    font-family: 'Lora', serif;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 40px;
 }
 
-textarea:focus, input:focus{
+input:focus{
     outline: none;
-    background-color: #F7F7F7;
 }
-
 
 input {
     width: 95%;
-    padding: 12px 0px 15px 10px;
-    margin: 8px 0px;
-    margin-bottom: 50px;
-    border: 0px;
+    padding: 12px 0 15px 10px;
+    margin: 8px 0 10px;
+    border: 0;
     border-bottom: solid #EAEAEA 1px;
     font-size: 16px;
 }
@@ -67,13 +74,45 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-.title {
-    font: 400 34px 'Lora';
-    margin-bottom: 10px;
-}
-
 .form-style {
     color: #7A7A7A;
     font: 400 12px 'Oxygen';
+}
+
+.warning-button {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-left: 8px;
+    height: 40px;
+    font-family: 'Oxygen', serif;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.warning-button_wrong {
+    background-color: #FFEBEA;
+    border-left: 2px solid #E86961;
+    opacity: 0;
+    height: 0;
+    transition: height 0.3s, opacity 0.3s;
+}
+
+.warning-button_active {
+    opacity: 1;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.main-box__input-warning {
+    margin-bottom: 40px;
+    visibility: hidden;
+    font: 400 12px 'Oxygen';
+    color: #E86961;
+}
+
+.email__visible {
+
 }
 

@@ -13,8 +13,8 @@
 <body class="body">
   <div class="logo">
     <div style="display: flex; align-items: baseline;">
-      <h1 class="title" style="font-size: 45.5px;">Escape.</h1>
-      <p class="slogan" style="font-size: 24.5px;">author</p>
+      <h1 class="title">Escape.</h1>
+      <p class="title title_small">author</p>
     </div>
     <p class="slogan">
       Log in to start creating
@@ -22,15 +22,23 @@
   </div>
   <section class="registration-box">
     <h2 class="title" style="margin-bottom: 60px;">Log In</h2>
-    <form action="" class="form-style">
+    <div class="warning-button_wrong">
+      <div class="warning-button">
+        <img src="../static/images/alert-circle.svg" alt="warning">
+        <p>A-Ah! Check all fields</p>
+      </div>
+    </div>
+    <form action="" class="form-style" id="login" onsubmit="return validateForm()" method="post">
       <label for="Email">Email</label>
-      <input class="input" type="email" id="Email" name="Email" required>
-
+      <input class="input" type="text" id="email" name="Email" onclick="checkField(this, 'email-req')">
+      <p class="main-box__input-warning" id="email-req">Email is required</p>
       <label for="password">Password</label>
-      <input class="input" type="password" id="password" name="password" required>
-
+      <input class="input" type="password" id="password" name="password" onclick="checkField(this, 'password-req')">
+      <p class="main-box__input-warning" id="password-req">Password is required</p>
       <input type="submit" value="Log In">
     </form>
   </section>
-
+  <section class="scripts">
+    <script src="/static/login.js" class="scripts__login"></script>
+  </section>
 </body>

@@ -2,52 +2,54 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title> {{ .Title }} </title>
-  <link href="/static/css/main.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title> {{ .Title }} </title>
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header>
-    <div class="heading">
-      <span class="logo logo_color">Escape.</span>
-      <nav class="heading__nav nav">
-        <a class="nav__link nav__link_color" href="#">HOME</a>
-        <a class="nav__link nav__link_color" href="#">CATEGORIES</a>
-        <a class="nav__link nav__link_color" href="#">ABOUT</a>
-        <a class="nav__link nav__link_color" href="#">CONTACT</a>
-      </nav>
+<header>
+    <div class="heading logo-menu">
+        <span class="logo logo_color">Escape.</span>
+        <nav class="heading__nav nav">
+            <a class="nav__link nav__link_color" href="#">HOME</a>
+            <a class="nav__link nav__link_color" href="#">CATEGORIES</a>
+            <a class="nav__link nav__link_color" href="#">ABOUT</a>
+            <a class="nav__link nav__link_color" href="#">CONTACT</a>
+        </nav>
     </div>
     <div class="description description_height">
-      <h1 class="description__slogan description__slogan_color">{{ .Title }}</h1>
-      <p class="description__text description__text_color">{{ .Subtitle }}</p>
+        <h1 class="description__slogan description__slogan_color">{{ .Title }}</h1>
+        <p class="description__text description__text_color">{{ .Subtitle }}</p>
     </div>
-  </header>
-  <section class="main">
+</header>
+<section class="main">
     <img class="main__image" src="{{ .ImageUrl }}" alt="{{ .Title }}">
     <div class="main__texts">
-      <p class="main__text">
-        {{ .Content }}
-      </p>
+        <p class="main__text">
+            {{ .Content }}
+        </p>
     </div>
-  </section>
-  <div class="intouch-basement">
+</section>
+<div class="intouch-basement">
     <h2 class="intouch__name">Stay in Touch</h2>
     <form class="intouch__data">
-      <input class="data__email" type="text" name="email" placeholder="Enter your email address">
-      <input class="data__submit" type="submit">
+        <input class="data__email" type="text" name="email" placeholder="Enter your email address">
+        <input class="data__submit" type="submit">
     </form>
-  <footer class="basement">
-    <span class="logo">Escape.</span>
-    <nav class="basement__nav nav">
-      <a class="nav__nav-link" href="#">HOME</a>
-      <a class="nav__nav-link" href="#">CATEGORIES</a>
-      <a class="nav__nav-link" href="#">ABOUT</a>
-      <a class="nav__nav-link" href="#">CONTACT</a>
-    </nav>
-  </footer>
+    <footer class="basement">
+        <div class="basement__flex logo-menu">
+            <span class="logo">Escape.</span>
+            <nav class="basement__nav nav">
+                <a class="nav__nav-link" href="#">HOME</a>
+                <a class="nav__nav-link" href="#">CATEGORIES</a>
+                <a class="nav__nav-link" href="#">ABOUT</a>
+                <a class="nav__nav-link" href="#">CONTACT</a>
+            </nav>
+        </div>
+    </footer>
 </div>
 </body>
 
